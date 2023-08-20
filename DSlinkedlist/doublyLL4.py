@@ -2,20 +2,26 @@ class Node:
     def __init__(self, val):
         self.val = val
         self.next = None
+        self.prev = None
 
 
 class LinkedList:
     def __init__(self):
         self.head = None
-        self.last_node = None
+        self.last = None
 
     def append(self, val):
-        if self.last_node is None:
+        if self.last == None:
             self.head = Node(val)
-            self.last_node = self.head
+            self.last = self.head
         else:
-            self.last_node.next = Node(val)
-            self.last_node = self.last_node.next
+            # new_node = Node(val)
+            # self.last.next = new_node
+            # new_node.prev = self.last
+            # new_node.next = None
+            self.last.next = Node(val)
+            Node(val).prev = self.last
+            self.last = self.last.next
 
     def display(self):
         current = self.head
@@ -24,22 +30,13 @@ class LinkedList:
             current = current.next
         print()
 
-    def Mid(self):
-        print(getMid(self.head))
-
-
-def getMid(head):
-    fast = slow = head
-    while fast.next != None and fast.next.next != None:
-        slow = slow.next
-        fast = fast.next.next
-    return slow.val
-
 
 if __name__ == "__main__":
     L = LinkedList()
     L.append(1)
     L.append(2)
     L.append(3)
+    L.append(4)
+    L.append(5)
     L.display()
-    L.Mid()
+# 20230717
